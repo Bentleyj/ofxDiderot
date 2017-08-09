@@ -50,7 +50,6 @@ void ofxDiderotApp::stepLeft() {
 	index %= imagePaths.size();	
 	//cout << indexToLoad << ": " << imagePaths[indexToLoad] << endl;
 	image.load(imagePaths[index]);
-
 }
 
 //--------------------------------------------------------------
@@ -59,6 +58,12 @@ void ofxDiderotApp::stepRight() {
 	index %= imagePaths.size();
 	//cout << indexToLoad << ": " << imagePaths[indexToLoad] << endl;
 	image.load(imagePaths[index]);
+}
+
+//--------------------------------------------------------------
+void ofxDiderotApp::resetToBeginning() {
+    index = 0;
+    image.load(imagePaths[index]);
 }
 
 //--------------------------------------------------------------

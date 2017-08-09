@@ -13,6 +13,7 @@ class ofxDiderotApp : public ofBaseApp{
 		void draw();
 		void stepLeft();
 		void stepRight();
+        void resetToBeginning();
 		void loadImages(string path);
 
 		void keyPressed(int key);
