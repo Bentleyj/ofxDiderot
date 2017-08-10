@@ -2,10 +2,10 @@
 
 //--------------------------------------------------------------
 void ofxDiderotApp::setup(){
-    
 	index = 0;
 }
 
+//--------------------------------------------------------------
 void ofxDiderotApp::loadImages(string path) {
 	string imagesRoot = "../../../../../DiderotData/" + path;
 	ofSetDataPathRoot(imagesRoot);
@@ -66,10 +66,10 @@ bool ofxDiderotApp::stepLeft() {
 bool ofxDiderotApp::stepRight() {
     bool loop = false;
 	index++;
-    if(index == imagePaths.size()) {
+    if(index == imagePaths.size()+1) {
+        index = 0;
         loop = true;
     }
-	index %= imagePaths.size();
 	bool loaded = image.load(imagePaths[index]);
     return loop;
 }
