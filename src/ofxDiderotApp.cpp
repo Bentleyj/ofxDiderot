@@ -3,10 +3,7 @@
 //--------------------------------------------------------------
 void ofxDiderotApp::setup(){
     
-	loadImages("SUP1/");
-
 	index = 0;
-	//ofSetRectMode(OF_RECTMODE_CENTER);
 }
 
 void ofxDiderotApp::loadImages(string path) {
@@ -54,24 +51,27 @@ void ofxDiderotApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofxDiderotApp::stepLeft() {
+bool ofxDiderotApp::stepLeft() {
+    bool loop = false;
 	index--;
-    if(index == -1)
+    if(index == -1) {
         index = imagePaths.size()-1;
-	cout << imagePaths[index] << endl;
+        loop = true;
+    }
 	bool loaded = image.load(imagePaths[index]);
-    cout<<"Loaded: "<<loaded<<endl;
-    image.update();
+    return loop;
 }
 
 //--------------------------------------------------------------
-void ofxDiderotApp::stepRight() {
+bool ofxDiderotApp::stepRight() {
+    bool loop = false;
 	index++;
+    if(index == imagePaths.size()) {
+        loop = true;
+    }
 	index %= imagePaths.size();
-    cout << imagePaths[index] << endl;
 	bool loaded = image.load(imagePaths[index]);
-    cout<<"Loaded: "<<loaded<<endl;
-    image.update();
+    return loop;
 }
 
 //--------------------------------------------------------------
