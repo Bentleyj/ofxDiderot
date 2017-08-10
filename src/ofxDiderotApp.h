@@ -11,8 +11,8 @@ class ofxDiderotApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-		void stepLeft();
-		void stepRight();
+		bool stepLeft();
+		bool stepRight();
         void resetToBeginning();
 		void loadImages(string path);
 
