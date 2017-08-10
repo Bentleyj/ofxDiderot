@@ -15,17 +15,26 @@ void ofxDiderotApp::loadImages(string path) {
 
 	imagePaths.clear();
 	loader.clearPaths();
-	cout << "Starting to load Paths: " << ofGetElapsedTimef() << endl;
-	imagePaths = loader.load("", "jpeg");
-	cout << "End Load Paths: " << ofGetElapsedTimef() << endl;
+	imagePaths = loader.load(imagesRoot, "jpeg");
 	cout << "We loaded " << imagePaths.size() << " images." << endl;
-
+    
+    string prefix = "../../";
+    for(int i = 0; i < imagePaths.size(); i++) {
+        string::size_type s = imagePaths[i].find(prefix);
+        imagePaths[i].erase(s, prefix.length());
+        //imagePaths[i].erase(prefix, prefix.length());
+    }
+    
+    ofSetDataPathRoot("../../../data/");
+    
 	if (imagePaths.size() > 0) {
-		image.load(imagePaths[0]);
+        bool loaded = image.load(imagePaths[0]);
+
 	}
 	else {
 		cout << "ofxDidertoApp::loadImaegs [Error] Path: " + imagesRoot + " contained no jpeg files." << endl;
 	}
+    
 }
 
 //--------------------------------------------------------------
@@ -47,17 +56,22 @@ void ofxDiderotApp::draw(){
 //--------------------------------------------------------------
 void ofxDiderotApp::stepLeft() {
 	index--;
-	index %= imagePaths.size();	
-	//cout << indexToLoad << ": " << imagePaths[indexToLoad] << endl;
-	image.load(imagePaths[index]);
+    if(index == -1)
+        index = imagePaths.size()-1;
+	cout << imagePaths[index] << endl;
+	bool loaded = image.load(imagePaths[index]);
+    cout<<"Loaded: "<<loaded<<endl;
+    image.update();
 }
 
 //--------------------------------------------------------------
 void ofxDiderotApp::stepRight() {
 	index++;
 	index %= imagePaths.size();
-	//cout << indexToLoad << ": " << imagePaths[indexToLoad] << endl;
-	image.load(imagePaths[index]);
+    cout << imagePaths[index] << endl;
+	bool loaded = image.load(imagePaths[index]);
+    cout<<"Loaded: "<<loaded<<endl;
+    image.update();
 }
 
 //--------------------------------------------------------------
