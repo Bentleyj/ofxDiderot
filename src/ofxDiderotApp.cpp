@@ -7,12 +7,12 @@ void ofxDiderotApp::setup(){
 
 //--------------------------------------------------------------
 void ofxDiderotApp::loadImages(string path) {
-	string imagesRoot = "../../../../../DiderotData/" + path;
+	string imagesRoot = "../../../../../GutenbergData/" + path;
 	ofSetDataPathRoot(imagesRoot);
 
 	imagePaths.clear();
 	loader.clearPaths();
-	imagePaths = loader.load(imagesRoot, "jpeg");
+	imagePaths = loader.load(imagesRoot, "jpg");
 	cout << "We loaded " << imagePaths.size() << " images." << endl;
     
     string prefix = "../../";
@@ -29,7 +29,7 @@ void ofxDiderotApp::loadImages(string path) {
 
 	}
 	else {
-		cout << "ofxDidertoApp::loadImaegs [Error] Path: " + imagesRoot + " contained no jpeg files." << endl;
+		cout << "ofxDidertoApp::loadImages [Error] Path: " + imagesRoot + " contained no jpeg files." << endl;
 	}
     
 }
@@ -66,7 +66,7 @@ bool ofxDiderotApp::stepLeft() {
 bool ofxDiderotApp::stepRight() {
     bool loop = false;
 	index++;
-    if(index == imagePaths.size()+1) {
+    if(index == imagePaths.size()) {
         index = 0;
         loop = true;
     }
