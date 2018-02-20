@@ -1,5 +1,21 @@
 #include "ofxDiderotApp.h"
 
+bool comparePages(string a, string b) {
+    string aCut = ofSplitString(a, ".")[0];
+    aCut = ofSplitString(aCut, "/")[2];
+    aCut = ofSplitString(aCut, "_")[0];
+    if(ofSplitString(aCut, "F").size() > 1)
+        aCut = ofSplitString(aCut, "F")[1];
+    int an = ofToInt(aCut);
+    string bCut = ofSplitString(b, ".")[0];
+    bCut = ofSplitString(bCut, "/")[2];
+    bCut = ofSplitString(bCut, "_")[0];
+    if(ofSplitString(bCut, "F").size() > 1)
+        bCut = ofSplitString(bCut, "F")[1];
+    int bn = ofToInt(bCut);
+    return an < bn;
+}
+
 //--------------------------------------------------------------
 void ofxDiderotApp::setup(){
 	index = 0;
@@ -7,23 +23,16 @@ void ofxDiderotApp::setup(){
 
 //--------------------------------------------------------------
 void ofxDiderotApp::loadImages(string path) {
-	string imagesRoot = "../../../../../GutenbergData/" + path;
-	ofSetDataPathRoot(imagesRoot);
+	string imagesRoot = "GutenbergData/" + path;
+	//ofSetDataPathRoot(imagesRoot);
 
 	imagePaths.clear();
 	loader.clearPaths();
-	imagePaths = loader.load(imagesRoot, "jpg");
+	imagePaths = loader.load(imagesRoot);
 	cout << "We loaded " << imagePaths.size() << " images." << endl;
     
-    string prefix = "../../";
-    for(int i = 0; i < imagePaths.size(); i++) {
-        string::size_type s = imagePaths[i].find(prefix);
-        imagePaths[i].erase(s, prefix.length());
-        //imagePaths[i].erase(prefix, prefix.length());
-    }
-    
-    ofSetDataPathRoot("../../../data/");
-    
+   // std::sort(imagePaths.begin(), imagePaths.end(), comparePages);
+        
 	if (imagePaths.size() > 0) {
         bool loaded = image.load(imagePaths[0]);
 
@@ -36,7 +45,7 @@ void ofxDiderotApp::loadImages(string path) {
 
 //--------------------------------------------------------------
 void ofxDiderotApp::update(){
-	stepRight();
+	//stepRight();
 }
 
 //--------------------------------------------------------------
@@ -70,6 +79,7 @@ bool ofxDiderotApp::stepRight() {
         index = 0;
         loop = true;
     }
+    //cout<<imagePaths[index]<<endl;
 	bool loaded = image.load(imagePaths[index]);
     return loop;
 }
