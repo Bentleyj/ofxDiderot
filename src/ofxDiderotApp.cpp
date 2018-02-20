@@ -72,7 +72,6 @@ bool ofxDiderotApp::stepLeft() {
 
 //--------------------------------------------------------------
 bool ofxDiderotApp::stepRight(ofImage* img) {
-    cout<<"stepped: ";
     bool loop = false;
 	index++;
     if(index == imagePaths.size()) {
@@ -81,7 +80,6 @@ bool ofxDiderotApp::stepRight(ofImage* img) {
     }
     //cout<<imagePaths[index]<<endl;
 	bool loaded = img->load(imagePaths[index]);
-    cout<<loaded<<endl;
     return loop;
 }
 
