@@ -12,7 +12,7 @@ class ofxDiderotApp : public ofBaseApp{
 		void update();
 		void draw();
 		bool stepLeft();
-		bool stepRight();
+		bool stepRight(ofImage* img);
         void resetToBeginning();
 		void loadImages(string path);
 

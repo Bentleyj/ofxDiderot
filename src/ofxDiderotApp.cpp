@@ -35,7 +35,6 @@ void ofxDiderotApp::loadImages(string path) {
         
 	if (imagePaths.size() > 0) {
         bool loaded = image.load(imagePaths[0]);
-
 	}
 	else {
 		cout << "ofxDidertoApp::loadImages [Error] Path: " + imagesRoot + " contained no jpeg files." << endl;
@@ -45,7 +44,7 @@ void ofxDiderotApp::loadImages(string path) {
 
 //--------------------------------------------------------------
 void ofxDiderotApp::update(){
-	//stepRight();
+//    stepRight();
 }
 
 //--------------------------------------------------------------
@@ -72,7 +71,8 @@ bool ofxDiderotApp::stepLeft() {
 }
 
 //--------------------------------------------------------------
-bool ofxDiderotApp::stepRight() {
+bool ofxDiderotApp::stepRight(ofImage* img) {
+    cout<<"stepped: ";
     bool loop = false;
 	index++;
     if(index == imagePaths.size()) {
@@ -80,7 +80,8 @@ bool ofxDiderotApp::stepRight() {
         loop = true;
     }
     //cout<<imagePaths[index]<<endl;
-	bool loaded = image.load(imagePaths[index]);
+	bool loaded = img->load(imagePaths[index]);
+    cout<<loaded<<endl;
     return loop;
 }
 
@@ -96,7 +97,7 @@ void ofxDiderotApp::keyPressed(int key){
 		stepLeft();
 	}
 	else if (key == OF_KEY_RIGHT) {
-		stepRight();
+//        stepRight();
 	}
 }
 
